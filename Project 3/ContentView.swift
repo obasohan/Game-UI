@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+struct FlagImage: View {
+   var text: String
+    
+    var body: some View {
+        Image(text)
+            .cornerRadius(6)
+            .shadow(radius: 1)
+    }
+}
+
+
 struct ContentView: View {
     static let allCountries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"]
     
@@ -17,6 +28,7 @@ struct ContentView: View {
     @State private var userScore = 0
     @State private var questionCounter = 1
     @State private var gameOver = false
+    
     
     
     var body: some View {
@@ -43,9 +55,7 @@ struct ContentView: View {
                     Button() {
                         systemResponse(number)
                     } label: {
-                        Image(countries[number])
-                            .cornerRadius(6)
-                            .shadow(radius: 1)
+                        FlagImage(text:countries[number])
                     }
                 }
 
@@ -62,7 +72,7 @@ struct ContentView: View {
             
         }
         .alert (feedback, isPresented: $isTapped) {
-            Button("Continue", action:nextQuestion)
+            Button("Continue", action: nextQuestion)
         } message: {
             Text("Your score is \(userScore)")
         }
