@@ -65,7 +65,7 @@ struct ContentView: View {
                     }
                     .rotation3DEffect(.degrees(selectedFlag == number ? animationAmount : 0), axis: (x:0, y:1, z:0))
                     .opacity(selectedFlag == nil || selectedFlag == number ? 1 : 0.25)
-                    .blur(radius: selectedFlag == nil || selectedFlag == number ? 1 : 0.25)
+                    .blur(radius: selectedFlag == nil || selectedFlag == number ? 0 : 10)
                 }
                 
                 
