@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FlagImage: View {
-   var text: String
+   let text: String
     
     var body: some View {
         Image(text)
@@ -28,7 +28,9 @@ struct ContentView: View {
     @State private var userScore = 0
     @State private var questionCounter = 1
     @State private var gameOver = false
-    
+    @State private var animationAmount = 0.0
+    @State private var selectedFlag : Int?
+  
     
     
     var body: some View {
@@ -54,11 +56,18 @@ struct ContentView: View {
                 ForEach(0...2, id:\.self) { number in
                     Button() {
                         systemResponse(number)
+                        selectedFlag = number
+                        withAnimation {
+                            animationAmount += 360
+                        }
                     } label: {
                         FlagImage(text:countries[number])
                     }
+                    .rotation3DEffect(.degrees(selectedFlag == number ? animationAmount : 0), axis: (x:0, y:1, z:0))
+                    .opacity(selectedFlag == nil || selectedFlag == number ? 1 : 0.25)
+                    .blur(radius: selectedFlag == nil || selectedFlag == number ? 1 : 0.25)
                 }
-
+                
                 
                 Spacer()
                 
@@ -123,6 +132,8 @@ struct ContentView: View {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         questionCounter += 1
+        animationAmount = 0
+        selectedFlag = nil
     }
     
     
