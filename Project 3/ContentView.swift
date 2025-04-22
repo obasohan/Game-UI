@@ -30,6 +30,7 @@ struct ContentView: View {
     @State private var gameOver = false
     @State private var animationAmount = 0.0
     @State private var selectedFlag : Int?
+
   
     
     
@@ -99,6 +100,7 @@ struct ContentView: View {
         if number == correctAnswer {
             feedback = "Correct!"
             userScore += 1
+           
             
         } else {
             let requireThe = ["UK", "US"]
@@ -114,6 +116,7 @@ struct ContentView: View {
             if userScore > 0 {
                 userScore -= 1
             }
+        
             
         }
         
